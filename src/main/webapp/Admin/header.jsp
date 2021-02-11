@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Cybage E-Laerning</title>
+<title>Cybage E-Learning</title>
     <!-- site icon -->
     <link href="<%=request.getContextPath() %>/images/Cybage-e-learning.ico" rel="icon" />
     
@@ -25,7 +25,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container-fluid">
-		  <a class="navbar-brand" href="<%= request.getContextPath()%>/Admin/AdminDashboard.jsp">
+		  <a class="navbar-brand" href="<%=request.getContextPath()%>/Admin/AdminDashboard.jsp">
             <img src="<%=request.getContextPath() %>/images/Cybage-e-learning-logo.png" class="image-fluid imgLogo" /> </a>
 			
 

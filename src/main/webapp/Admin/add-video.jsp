@@ -22,7 +22,7 @@
 	<form action="<%=request.getContextPath() %>/AdminController/add_video" method="post"  enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-lg-2">Select Course: </div>
-		<div class="col-lg-8"><select name="course" value="Select Course" required="true">
+		<div class="col-lg-8"><select name="course" value="Select Course" required>
 			<c:forEach var="u" items="${courses}">
 	
 				<option value="${u.id }" >${u.name }</option>
@@ -35,17 +35,17 @@
 	
 	<div class="row">
 		<div class="col-lg-2">Video Name:</div>
-		<div class="col-lg-8"><input type="text" name="vname"></div>
+		<div class="col-lg-8"><input type="text" name="vname" required></div>
 	</div><br>
 	
 	<div class="row">
 		<div class="col-lg-2">Video Duration:</div>
-		<div class="col-lg-8"> <input type="number" name="duration"></div>
+		<div class="col-lg-8"> <input type="number" name="duration" required></div>
 	</div><br>
 	
 	<div class="row">
 		<div class="col-lg-2">Video Location:</div>
-		<div class="col-lg-8"><input type="text" name="video_url" ></div>
+		<div class="col-lg-8"><input type="text" name="video_url" required></div>
 	</div><br>
 	
 	<div class="row">

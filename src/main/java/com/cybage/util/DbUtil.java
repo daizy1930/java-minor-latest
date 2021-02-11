@@ -1,65 +1,52 @@
 package com.cybage.util;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-//import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import com.cybage.controller.AdminController;
+
+@SuppressWarnings("unused")
 public class DbUtil {
+	public static final Logger log = LogManager.getLogger(AdminController.class.getName());
+	private static String className = "com.mysql.cj.jdbc.Driver";	
+	private static String dbUrl;
+	private static String dbUser;
+	private static String dbPass;
 	
-	private static String dbUrl = "jdbc:mysql://localhost:3306/java-minor";
-	private static String dbUser = "root";
-	private static String dbPassword = "cybage@123";
-	private static String className="com.mysql.cj.jdbc.Driver";
-
-//	static {
-//		try {
-//			FileReader reader = new FileReader("db.properties");
-//			Properties props = new Properties();
-//			
-//			props.load(reader);
-//			dbUrl = props.getProperty("dbUrl");
-//			dbUser = props.getProperty("dbUser");
-//			dbPassword = props.getProperty("dbPassword");
-//			className = props.getProperty("className");
-//			
-//			
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-	
-	
-	
-	public static Connection getCon() throws SQLException{
+	static {  
+		//If want to execute something during class loading
 		try {
-			Class.forName(className);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Connection conn = DriverManager.getConnection(dbUrl,dbUser,dbPassword);
-		return conn;
-//		BasicDataSource ds = new BasicDataSource();
-//		ds.setUrl(dbUrl);
-//		ds.setUsername(dbUser);
-//		ds.setPassword(dbPassword);
-//		ds.setMinIdle(5);
-//		ds.setMaxIdle(10);
-//		ds.setMaxOpenPreparedStatements(100);
-//	
-//		return ds.getConnection();
+			FileReader reader = new FileReader("D:\\db.properties");
+			Properties props = new Properties();
+			
+			props.load(reader); //Load into the properties file as a key-value pair
+			dbUrl = props.getProperty("dbUrl");
+			dbUser = props.getProperty("dbUser");
+			dbPass = props.getProperty("dbPass");			
+		} catch (Exception e) {
+			log.error("Error:" + e.getLocalizedMessage());
+	}
 
 	}
 
-
-	       
-	      
-
-	
-	
+	@SuppressWarnings("resource")
+	public static Connection getCon() throws SQLException{
+		BasicDataSource ds = new BasicDataSource();
+		ds.setUrl(dbUrl);
+		ds.setUsername(dbUser);
+		ds.setPassword(dbPass);
+		ds.setMinIdle(5);
+		ds.setMaxIdle(10);
+		ds.setMaxOpenPreparedStatements(100);
+		return ds.getConnection();
+	}
 }
