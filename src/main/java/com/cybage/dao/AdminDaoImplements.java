@@ -10,8 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
 
+import com.cybage.controller.AdminController;
 import com.cybage.model.Category;
 import com.cybage.model.Course;
 import com.cybage.model.User;
@@ -19,16 +22,16 @@ import com.cybage.model.Video;
 import com.cybage.util.DbUtil;
 
 public class AdminDaoImplements implements AdminDaoInterface{
-
+	public static final Logger log = LogManager.getLogger(AdminController.class.getName());
+	
 	public int addCourse(Course c,int Category_id) throws SQLException {
-		System.out.println("hi");
+		log.debug("Inside addCourse in AdminDao");
 		String sql = "insert into course(course_name,category_id,course_desc,course_image) values(?,?,?,?)";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, c.getName());
@@ -39,7 +42,7 @@ public class AdminDaoImplements implements AdminDaoInterface{
 	}
 
 	public boolean deleteCourse(int id) throws SQLException{
-		// TODO Auto-generated method stub
+		log.debug("Inside deleteCourse in AdminDao");
 		String sql = "delete from course where course_id=?";
 		Connection con = null;
 		try {
@@ -61,6 +64,7 @@ public class AdminDaoImplements implements AdminDaoInterface{
 	}
 
 	public List<Course> getCourse() throws SQLException {
+		log.debug("Inside getCourse in AdminDao");
 		String sql = "SELECT * from category c, course ce where c.category_id=ce.category_id";
 
 		Connection con = null;
@@ -91,18 +95,18 @@ public class AdminDaoImplements implements AdminDaoInterface{
 	}
 
 	public Course getCourseById(int id) {
-		// TODO Auto-generated method stub
+		log.debug("Inside getCourseById in AdminDao");
 		return null;
 	}
 
 	public List<Course> getCourseByCid(int id) {
-		// TODO Auto-generated method stub
+		log.debug("Inside getCourseById in AdminDao");
 		return null;
 	}
 
 
 	public List<Category> getCategory() throws SQLException {
-		// TODO Auto-generated method stub
+		log.debug("Inside getCategory in AdminDao");
 		String sql = "select * from category";
 
 		Connection con = null;
@@ -131,7 +135,7 @@ public class AdminDaoImplements implements AdminDaoInterface{
 	}
 
 	public List<Video> getVideo() throws SQLException {
-		// TODO Auto-generated method stub
+		log.debug("Inside getVideo in AdminDao");
 		String sql = "select course_name, video_name, duration,video_url, video_id from course ce join video v on ce.course_id=v.course_id;";
 
 		Connection con = null;
@@ -160,6 +164,7 @@ public class AdminDaoImplements implements AdminDaoInterface{
 
 
 	public boolean updateVideo(Video v) throws SQLException{
+		log.debug("Inside updateVideo in AdminDao");
 		String sql="update video set video_name =? ,duration=?,video_url=? where video_id=?";
 		Connection con = null;
 		try {

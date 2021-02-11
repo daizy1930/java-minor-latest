@@ -18,7 +18,7 @@
 	<form action="<%=request.getContextPath() %>/AdminController/add_course" method="post"  enctype="multipart/form-data">
 	<div class="row">
 		<div class="col-lg-2">Select Category: </div>
-		<div class="col-lg-8"><select name="category" value="Select Category" required="true">
+		<div class="col-lg-8"><select name="category" value="Select Category" required>
 			<c:forEach var="u" items="${categories}">
 	
 				<option value="${u.id }" >${u.name }</option>
@@ -31,17 +31,17 @@
 	
 	<div class="row">
 		<div class="col-lg-2">Course Name:</div>
-		<div class="col-lg-8"><input type="text" name="cname"></div>
+		<div class="col-lg-8"><input type="text" name="cname" required></div>
 	</div><br>
 	
 	<div class="row">
 		<div class="col-lg-2">Course Description:</div>
-		<div class="col-lg-8"><input type="text" name="cdesc"></div>
+		<div class="col-lg-8"><input type="text" name="cdesc" required></div>
 	</div><br>
 	
 	<div class="row">
 		<div class="col-lg-2">Course Image:</div>
-		<div class="col-lg-8"><input type="file" name="cimage" size="500"></div>
+		<div class="col-lg-8"><input type="file" name="cimage" size="500" required></div>
 	</div><br>
 	
 	<div class="row">

@@ -1,12 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>Invalid username or password</h1>
-</body>
-</html>
+<%@include file="header.jsp"%>
+<div class="mySpace"></div>
+<div class="alert alert-danger text-center" role="alert">
+  <h2><strong>Invalid Username or Password</strong></h2>
+</div>
+<jsp:include page="index.jsp"></jsp:include>
+<%@include file="footer.jsp"%>

@@ -1,24 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ page isErrorPage= "true" %>
-  
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Error</title>
-</head>
-<body>
-        <h1>Error</h1>
-        <h2 > Error: <%=exception.getClass().getName() %><br/>
-    <%=exception.getMessage() %><br/>  
-  </h2>
-</body>
-</html>
+<%@include file="header.jsp"%>
+<%@ page isErrorPage="true"%>
+<div class="mySpace"></div>
+<div class="alert alert-danger text-center" role="alert">
+	<h2>
+		<strong>Error!</strong>
+	</h2>
+	<h2>
+		Error:
+		<%=exception.getClass().getName()%><br />
+		<%=exception.getLocalizedMessage()%><br />
+	</h2>
+</div>
+<jsp:include page="index.jsp"></jsp:include>
+<%@include file="footer.jsp"%>
 
 
 
- 
 
 
 

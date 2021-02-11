@@ -6,17 +6,25 @@
     <Appenders>
         <Console name="Console">
             <PatternLayout pattern="${layout}" />
-        </Console>   
-        <File name="MyFile" fileName="d://mylog.log" append="true">
-            <PatternLayout pattern="${layout}"/>
-        </File>      
+        </Console>    
+        
+        <RollingFile name="MyFile" fileName="d://cybagelog.log"
+                     filePattern="app.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${layout}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+        
     </Appenders>
     <Loggers>
-        <Logger name="com.cybage" level="info" additivity="true" >
-            <AppenderRef ref="MyFile" />
+        <Logger name="com.cybage" level="debug" additivity="true" >
+            <AppenderRef ref="MyFile"/>
         </Logger>
         <Root level="info">
-            <AppenderRef ref="Console" />
+            <AppenderRef ref="Console"/>
         </Root>  
     </Loggers>
 </Configuration>
