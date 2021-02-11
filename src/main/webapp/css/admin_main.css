@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+.bg{
+	
+background-image: url("/images/baground.jpg");
+	
+  /* Full height */
+  height: 100%; 
+
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.myContainer{
+	margin-top: 300px;
+}
+.cardsDashboard{
+	text-decoration: none;
+}
