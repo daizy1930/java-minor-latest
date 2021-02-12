@@ -21,17 +21,17 @@ import com.cybage.model.User;
 import com.cybage.model.Video;
 import com.cybage.util.DbUtil;
 
-public class AdminDaoImplements implements AdminDaoInterface{
+public class AdminDaoImplements implements AdminDaoInterface {
 	public static final Logger log = LogManager.getLogger(AdminController.class.getName());
-	
-	public int addCourse(Course c,int Category_id) throws SQLException {
+
+	public int addCourse(Course c, int Category_id) throws Exception {
 		log.debug("Inside addCourse in AdminDao");
 		String sql = "insert into course(course_name,category_id,course_desc,course_image) values(?,?,?,?)";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			log.error("Error: "+e.getLocalizedMessage());
+			log.error("Error: " + e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, c.getName());
@@ -41,42 +41,35 @@ public class AdminDaoImplements implements AdminDaoInterface{
 		return ps.executeUpdate();
 	}
 
-	public boolean deleteCourse(int id) throws SQLException{
+	public boolean deleteCourse(int id) throws Exception {
 		log.debug("Inside deleteCourse in AdminDao");
 		String sql = "delete from course where course_id=?";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: " + e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
-		int count=ps.executeUpdate();
-		if(count>0){
+		int count = ps.executeUpdate();
+		if (count > 0) {
 			return true;
 		}
-
-		// TODO Auto-generated method stub
 		return false;
-
 	}
 
-	public List<Course> getCourse() throws SQLException {
+	public List<Course> getCourse() throws Exception {
 		log.debug("Inside getCourse in AdminDao");
 		String sql = "SELECT * from category c, course ce where c.category_id=ce.category_id";
-
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: " + e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-
 		List<Course> courses = new ArrayList<Course>();
 		while (rs.next()) {
 			Course course = new Course();
@@ -85,9 +78,9 @@ public class AdminDaoImplements implements AdminDaoInterface{
 			course.setName(rs.getString(5));
 			course.setDesc(rs.getString(7));
 			course.setCourse_image(rs.getBinaryStream(8));
-			InputStream is=rs.getBinaryStream(8);
+			InputStream is = rs.getBinaryStream(8);
 			byte[] a = rs.getBytes(8);
-			String encode=Base64.encodeBase64String(a);
+			String encode = Base64.encodeBase64String(a);
 			course.setEncode(encode);
 			courses.add(course);
 		}
@@ -100,57 +93,50 @@ public class AdminDaoImplements implements AdminDaoInterface{
 	}
 
 	public List<Course> getCourseByCid(int id) {
-		log.debug("Inside getCourseById in AdminDao");
+		log.debug("Inside getCourseByCId in AdminDao");
 		return null;
 	}
 
-
-	public List<Category> getCategory() throws SQLException {
+	public List<Category> getCategory() throws Exception {
 		log.debug("Inside getCategory in AdminDao");
 		String sql = "select * from category";
-
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: " + e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-
 		List<Category> categories = new ArrayList<Category>();
 		while (rs.next()) {
-			Category category=new Category();
+			Category category = new Category();
 			category.setName(rs.getString(2));
 			category.setId(rs.getInt(1));
 			category.setCategory_url(rs.getString(3));
-			InputStream is=rs.getBinaryStream(3);
-			byte[] a=rs.getBytes(3);
-			String encode=Base64.encodeBase64String(a);
-			category.setEncode(encode);	
+			InputStream is = rs.getBinaryStream(3);
+			byte[] a = rs.getBytes(3);
+			String encode = Base64.encodeBase64String(a);
+			category.setEncode(encode);
 			categories.add(category);
 		}
 		return categories;
 	}
 
-	public List<Video> getVideo() throws SQLException {
+	public List<Video> getVideo() throws Exception {
 		log.debug("Inside getVideo in AdminDao");
 		String sql = "select course_name, video_name, duration,video_url, video_id from course ce join video v on ce.course_id=v.course_id;";
-
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: " + e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-
 		List<Video> videos = new ArrayList<Video>();
 		while (rs.next()) {
-			Video v=new Video();
+			Video v = new Video();
 			v.setCourse(rs.getString(1));
 			v.setName(rs.getString(2));
 			v.setDuration(rs.getInt(3));
@@ -158,95 +144,79 @@ public class AdminDaoImplements implements AdminDaoInterface{
 			v.setId(rs.getInt(5));
 			videos.add(v);
 		}
-
 		return videos;
 	}
 
-
-	public boolean updateVideo(Video v) throws SQLException{
+	public boolean updateVideo(Video v) throws Exception {
 		log.debug("Inside updateVideo in AdminDao");
-		String sql="update video set video_name =? ,duration=?,video_url=? where video_id=?";
+		String sql = "update video set video_name =? ,duration=?,video_url=? where video_id=?";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: " + e.getLocalizedMessage());
 		}
-		PreparedStatement ps=con.prepareStatement(sql);
+		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, v.getName());
 		ps.setInt(2, v.getDuration());
 		ps.setString(3, v.getUrl());
 		ps.setInt(4, v.getId());
-		int updateCount=ps.executeUpdate();
-		if(updateCount>0){
+		int updateCount = ps.executeUpdate();
+		if (updateCount > 0) {
 			return true;
 		}
 		return false;
-		// TODO Auto-generated method stub
-
 	}
-	public boolean updateCourse(Course c) throws SQLException {
+
+	public boolean updateCourse(Course c) throws Exception {
+		log.debug("Inside updateCourse in AdminDao");
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: " + e.getLocalizedMessage());
 		}
 		try {
-			if(c.getImage().getBinaryStream().read()==-1) {
-				String sql="UPDATE `course` SET `course_name`=?,`course_desc`=? WHERE `course_id`=?";
-				PreparedStatement ps=con.prepareStatement(sql);
+			if (c.getImage().getBinaryStream().read() == -1) {
+				String sql = "UPDATE `course` SET `course_name`=?,`course_desc`=? WHERE `course_id`=?";
+				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, c.getName());
 				ps.setString(2, c.getDesc());
 
 				ps.setInt(3, c.getId());
-				int updateCount=ps.executeUpdate();
-				if(updateCount>0){
+				int updateCount = ps.executeUpdate();
+				if (updateCount > 0) {
 					return true;
 				}
 				return false;
-			}
-			else {
-
-
-				String sql="UPDATE `course` SET `course_name`=?,`course_desc`=?,`course_url`=? WHERE `course_id`=?";
-
-				PreparedStatement ps=con.prepareStatement(sql);
+			} else {
+				String sql = "UPDATE `course` SET `course_name`=?,`course_desc`=?,`course_url`=? WHERE `course_id`=?";
+				PreparedStatement ps = con.prepareStatement(sql);
 				ps.setString(1, c.getName());
 				ps.setString(2, c.getDesc());
 				ps.setBlob(3, c.getImage());
 				ps.setInt(4, c.getId());
-				int updateCount=ps.executeUpdate();
-				if(updateCount>0){
+				int updateCount = ps.executeUpdate();
+				if(updateCount > 0) {
 					return true;
 				}
 				return false;
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch(IOException e) {
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 		return false;
 
-
-		// TODO Auto-generated method stub
-
-
-
 	}
 
-
-	public int addVideo(Video v, int course_id) throws SQLException {
-		System.out.println("hi");
+	public int addVideo(Video v, int course_id) throws Exception {
+		log.debug("Inside addVideo in AdminDao");
 		String sql = "INSERT INTO `video`(`course_id`, `video_name`, `duration`, `video_url`) VALUES (?,?,?,?)";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, course_id);
@@ -254,71 +224,50 @@ public class AdminDaoImplements implements AdminDaoInterface{
 		ps.setInt(3, v.getDuration());
 		ps.setString(4, v.getUrl());
 		return ps.executeUpdate();
-
-
-
 	}
 
-
-	public boolean updateCategory(Category c) throws SQLException {
+	public boolean updateCategory(Category c) throws Exception {
+		log.debug("Inside updateCategory in AdminDao");
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 
-		int updateCount=0;
+		int updateCount = 0;
 		try {
-			if(c.getImage().getBinaryStream().read()==-1) {
-
-
-				PreparedStatement ps=con.prepareStatement("update category set category_name=? where category_id=?");
+			if (c.getImage().getBinaryStream().read() == -1) {
+				PreparedStatement ps = con.prepareStatement("update category set category_name=? where category_id=?");
 				ps.setString(1, c.getName());
 				ps.setInt(2, c.getId());
+				updateCount = ps.executeUpdate();
 
-				// TODO Auto-generated method stub
-				updateCount=ps.executeUpdate();
-
-
-			}
-			else {
-
-				PreparedStatement ps=con.prepareStatement("update category set category_name=?,category_url=? where category_id=?");
+			} else {
+				PreparedStatement ps = con.prepareStatement("update category set category_name=?,category_url=? where category_id=?");
 				ps.setString(1, c.getName());
 				ps.setBlob(2, c.getImage());
-
 				ps.setInt(3, c.getId());
-
-				// TODO Auto-generated method stub
-				updateCount=ps.executeUpdate();
-
+				updateCount = ps.executeUpdate();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
-		if(updateCount>0){
+		if (updateCount > 0) {
 			return true;
 		}
 		return false;
-		// TODO Auto-generated method stub
-
-
 
 	}
 
-
-	public int addCategory(Category c) throws SQLException {
-		// TODO Auto-generated method stub
+	public int addCategory(Category c) throws Exception {
+		log.debug("Inside addCategory in AdminDao");
 		String sql = "insert into category(category_name,category_url) values(?,?)";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, c.getName());
@@ -326,48 +275,41 @@ public class AdminDaoImplements implements AdminDaoInterface{
 		return ps.executeUpdate();
 	}
 
-
-	public boolean deleteCategory(int id) throws SQLException {
+	public boolean deleteCategory(int id) throws Exception {
+		log.debug("Inside deleteCategory in AdminDao");
 		String sql = "delete from category where category_id=?";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
-		int count=ps.executeUpdate();
-		if(count>0){
+		int count = ps.executeUpdate();
+		if (count > 0) {
 			return true;
 		}
-
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	public boolean deleteVideo(int id) throws Exception {
+		log.debug("Inside deleteVideo in AdminDao");
 
-	public boolean deleteVideo(int id) throws SQLException {
-		// TODO Auto-generated method stub
 		String sql = "delete from video where video_id=?";
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("Error: "+e.getLocalizedMessage());
 		}
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, id);
-		int count=ps.executeUpdate();
-		if(count>0){
+		int count = ps.executeUpdate();
+		if (count > 0) {
 			return true;
 		}
-
-		// TODO Auto-generated method stub
 		return false;
 
 	}
-
 }
