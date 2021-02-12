@@ -40,7 +40,7 @@ public class AppController extends HttpServlet {
 			}
 			if (request.isUserInRole("user")) {
 				log.debug("Inside user of login in AppController ");
-				request.getRequestDispatcher("/user/view-user.jsp").forward(request, response);
+				request.getRequestDispatcher("/user/landing.jsp").forward(request, response);
 			}
 		}
 	}

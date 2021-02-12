@@ -34,8 +34,7 @@ public class DbUtil {
 			dbPass = props.getProperty("dbPass");			
 		} catch (Exception e) {
 			log.error("Error:" + e.getLocalizedMessage());
-	}
-
+		}
 	}
 
 	@SuppressWarnings("resource")

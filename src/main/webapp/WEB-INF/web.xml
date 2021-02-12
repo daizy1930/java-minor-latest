@@ -2,6 +2,10 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+<display-name>Cybage Learning</display-name>
+<welcome-file-list>
+   <welcome-file>/WelcomeController</welcome-file>
+</welcome-file-list>
 <error-page>
     <exception-type>java.lang.SQLException</exception-type>
     <location>/error.jsp</location>
@@ -89,6 +93,9 @@
     <location>/error.jsp</location>
 </error-page>
 </web-app>
+
+
+
 
 
 

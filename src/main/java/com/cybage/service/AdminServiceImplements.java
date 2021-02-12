@@ -19,17 +19,17 @@ public class AdminServiceImplements implements AdminServiceInterface {
 		this.ad = ad;
 	}
 
-	public int addCourse(Course c,int category_id) throws SQLException {
+	public int addCourse(Course c,int category_id) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.addCourse(c,category_id);
 	}
 
-	public boolean deleteCourse(int id) throws SQLException {
+	public boolean deleteCourse(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.deleteCourse(id);
 	}
 
-	public List<Course> getCourse() throws SQLException {
+	public List<Course> getCourse() throws Exception {
 		// TODO Auto-generated method stub
 		return ad.getCourse();
 	}
@@ -44,54 +44,54 @@ public class AdminServiceImplements implements AdminServiceInterface {
 		return null;
 	}
 
-	public boolean updateCourse(Course c) throws SQLException {
+	public boolean updateCourse(Course c) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.updateCourse(c);
 	}
 
-	public List<Category> getCategory() throws SQLException{
+	public List<Category> getCategory() throws Exception{
 		// TODO Auto-generated method stub
 	return ad.getCategory();
 	}
 
-	public List<Video> getVideo() throws SQLException {
+	public List<Video> getVideo() throws Exception {
 		// TODO Auto-generated method stub
 		return ad.getVideo();
 	}
 
 	
-	public boolean updateVideo(Video v) throws SQLException {
+	public boolean updateVideo(Video v) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.updateVideo(v);
 	}
 
 	
-	public int addVideo(Video vid, int Course_id) throws SQLException {
+	public int addVideo(Video vid, int Course_id) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.addVideo(vid, Course_id);
 	}
 
 	
-	public boolean updateCategory(Category c) throws SQLException{
+	public boolean updateCategory(Category c) throws Exception{
 		// TODO Auto-generated method stub
 		
 		return ad.updateCategory(c);
 	}
 
 
-	public int addCategory(Category c) throws SQLException {
+	public int addCategory(Category c) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.addCategory(c);
 	}
 
 	
-	public boolean deleteCategory(int id) throws SQLException {
+	public boolean deleteCategory(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.deleteCategory(id);
 	}
 
 
-	public boolean deleteVideo(int id) throws SQLException {
+	public boolean deleteVideo(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return ad.deleteVideo(id);
 	}
