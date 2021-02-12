@@ -2,7 +2,11 @@ package com.cybage.service;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.cybage.dao.UserDao;
+import com.cybage.dao.UserDaoImpl;
 import com.cybage.model.Category;
 import com.cybage.model.Course;
 import com.cybage.model.EnrollCourse;
@@ -10,6 +14,7 @@ import com.cybage.model.User;
 import com.cybage.model.Video;
 
 public class UserServiceImpl implements UserService{
+	public static final Logger log = LogManager.getLogger(UserDaoImpl.class.getName());
 
 	private UserDao userDao;
 	public UserServiceImpl(UserDao userDao) {
@@ -26,7 +31,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public List<Category> getCategory() throws Exception {
-	
+		log.debug("Inside getCategory of UserService");
 		return userDao.getCategory();
 	}
 

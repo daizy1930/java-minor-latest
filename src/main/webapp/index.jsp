@@ -1,6 +1,8 @@
 <%@include file="header.jsp"%>
-<%@page import="java.util.List"%>
 <%@page import="com.cybage.model.Category"%>
+<%@page import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page isELIgnored="false" %>
 <div class="mySpace"></div>
 <div class="text-center mt-5">
 	<h1>Welcome to Cybage Learning!</h1>
@@ -50,9 +52,9 @@
 			have fun exploring!</p>
 		<div class="card-group m-3">
 			
-			<%-- <c:forEach var="u" items="${allCategories}">
+			 <c:forEach var="u" items="${allCategories}">
 			<div class="card m-3">
-				<img src="${u.category_url}"
+				<img src="${u.category_image}"
 					class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title"><c:out value="${u.name}"></c:out></h5>
@@ -65,7 +67,7 @@
 						role="button">Explore more</a>
 				</div>
 			</div>
-			</c:forEach> --%>
+			</c:forEach> 
 			
 			
 			<div class="card m-3">

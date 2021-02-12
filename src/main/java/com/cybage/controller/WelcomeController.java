@@ -33,12 +33,17 @@ public class WelcomeController extends HttpServlet{
 			List<Category> allCategories = null;
 			try {
 				allCategories = userService.getCategory();
+				log.debug("allCategories:" + allCategories);
+				if(allCategories == null) {
+					log.debug("Bhai maltu nathi");
+				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.error("Error: " +e.getLocalizedMessage());
 			}
+			
 			request.setAttribute("allCategories", allCategories);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);		
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+				
 		}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
