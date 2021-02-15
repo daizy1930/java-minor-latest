@@ -3,8 +3,9 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
 <display-name>Cybage Learning</display-name>
+
 <welcome-file-list>
-   <welcome-file>/WelcomeController</welcome-file>
+   <welcome-file>WelcomeController</welcome-file>
 </welcome-file-list>
 <error-page>
     <exception-type>java.lang.SQLException</exception-type>
@@ -84,10 +85,10 @@
 		<exception-type>java.lang.UserException</exception-type>
 		<location>/error.jsp</location>
 	</error-page>
-	<error-page>
+<!-- 	<error-page>
 		<error-code>404</error-code>
 		<location>/404.jsp</location>
-	</error-page>
+	</error-page> -->
 <error-page>
     <exception-type>javax.servlet.ServletException</exception-type>
     <location>/error.jsp</location>

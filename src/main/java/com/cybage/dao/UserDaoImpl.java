@@ -14,18 +14,18 @@ import com.cybage.util.DbUtil;
 
 import java.io.FileOutputStream;
 
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
+//import com.itextpdf.text.BaseColor;
+//import com.itextpdf.text.Document;
+//import com.itextpdf.text.DocumentException;
+//import com.itextpdf.text.Font;
+//import com.itextpdf.text.Paragraph;
 //import com.itextpdf.text.pdf.PdfWriter;
 
 public class UserDaoImpl implements UserDao {
 	public static final Logger log = LogManager.getLogger(UserDaoImpl.class.getName());
 
 	public int addUser(User user) throws Exception {
-		System.out.println("Inside addUser in DaoImpl");
+		log.debug("Inside addUser in UserDaoImpl");
 
 		Connection con;
 		con = DbUtil.getCon();
@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 
 		String sql = "select course_id, course_name, course_image, category_id, course_desc from course where category_id = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		System.out.println("in course table category_id: " + id);
+		log.debug("in course table category_id: " + id);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
 
@@ -70,8 +70,9 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public List<Category> getCategory() throws Exception {
+		log.debug("Inside getCategory of UserDao");
 		Connection con = DbUtil.getCon();
-		String sql = "select category_id, category_name, category_image from category";
+		String sql = "select category_id, category_name, category_url from category";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 
@@ -91,7 +92,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public int addEnrollement(EnrollCourse e) throws Exception {
-		System.out.println("inside add enrollement course");
+		log.debug("inside add enrollement course");
 		int count = 0;
 		Connection con = DbUtil.getCon();
 		String sql = "insert into enroll_course (user_id,course_id,completed_course,start_date) values (?,?,?,?)";
@@ -106,7 +107,7 @@ public class UserDaoImpl implements UserDao {
 		System.out.println(course_id);
 
 		if (ps.executeUpdate() == 1) {
-			System.out.println("insidde execute");
+			log.debug("insidde execute");
 			String sql1 = "select video_id from video where course_id=? ";
 			PreparedStatement ps1 = con.prepareStatement(sql1);
 			ps1.setInt(1, course_id);
@@ -124,7 +125,7 @@ public class UserDaoImpl implements UserDao {
 			}
 
 		} else {
-			System.out.println("not doner");
+			log.debug("not done");
 		}
 
 		return count;
@@ -331,11 +332,11 @@ public class UserDaoImpl implements UserDao {
 //		}
 	}
 
-	  private static void addEmptyLine(Paragraph paragraph, int number) {
+	  //private static void addEmptyLine(Paragraph paragraph, int number) {
 //		for (int i = 0; i < number; i++) {
 //			paragraph.add(new Paragraph(" "));
 //		}
-	}
+	//}
 
 	public boolean insertCertiDetais(String username,String coursename,int cid,int uid) throws Exception {
 		// TODO Auto-generated method stub

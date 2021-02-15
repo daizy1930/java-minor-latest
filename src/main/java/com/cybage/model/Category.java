@@ -11,6 +11,11 @@ public class Category {
 	private InputStream category_image;
 	private String encode;
 	private SerialBlob image;
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", category_url=" + category_url + ", category_image="
+				+ category_image + ", encode=" + encode + ", image=" + image + "]";
+	}
 	public SerialBlob getImage() {
 		return image;
 	}

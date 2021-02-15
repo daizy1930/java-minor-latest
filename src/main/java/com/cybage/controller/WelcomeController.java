@@ -19,27 +19,33 @@ import com.cybage.service.UserService;
 import com.cybage.service.UserServiceImpl;
 
 @WebServlet("/WelcomeController")
-public class WelcomeController extends HttpServlet{
+public class WelcomeController extends HttpServlet {
 	public static final Logger log = LogManager.getLogger(AdminController.class.getName());
 	private UserDao userDao = new UserDaoImpl();
 
 	private UserService userService = new UserServiceImpl(userDao);
+
 	public WelcomeController() {
 		super();
 	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			log.debug("Inside WelcomeController ");
-			List<Category> allCategories = null;
-			try {
-				allCategories = userService.getCategory();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		log.debug("Inside WelcomeController ");
+		List<Category> allCategories = null;
+		try {
+			allCategories = userService.getCategory();
+			log.debug("allCategories:" + allCategories);
+			if (allCategories == null) {
+				log.error("No category to display");
 			}
-			request.setAttribute("allCategories", allCategories);
-			request.getRequestDispatcher("/index.jsp").forward(request, response);		
+		} catch (Exception e) {
+			log.error("Error: " + e.getLocalizedMessage());
 		}
+		request.setAttribute("allCategories", allCategories);
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -1,6 +1,8 @@
 <%@include file="header.jsp"%>
-<%@page import="java.util.List"%>
 <%@page import="com.cybage.model.Category"%>
+<%@page import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page isELIgnored="false"%>
 <div class="mySpace"></div>
 <div class="text-center mt-5">
 	<h1>Welcome to Cybage Learning!</h1>
@@ -48,126 +50,39 @@
 		</h3>
 		<p class="lead">The users find these categories most-interacting.
 			have fun exploring!</p>
-		<div class="card-group m-3">
-			
-			<%-- <c:forEach var="u" items="${allCategories}">
-			<div class="card m-3">
-				<img src="${u.category_url}"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title"><c:out value="${u.name}"></c:out></h5>
-					<p class="card-text">Exclusive courses in this category</p>
-					<p class="card-text">
-						<small class="text-muted">Oxford University, UK</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
-				</div>
-			</div>
-			</c:forEach> --%>
-			
-			
-			<div class="card m-3">
-				<img src="<%=request.getContextPath()%>/images/motivation.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Category 1</h5>
-					<p class="card-text">Description on category 1</p>
-					<p class="card-text">
-						<small class="text-muted">Oxford University, UK</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
-				</div>
-			</div>
 
-			<div class="card m-3">
-				<img src="<%=request.getContextPath()%>/images/motivation.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Category 2</h5>
-					<p class="card-text">Description on category 2</p>
-					<p class="card-text">
-						<small class="text-muted">California University, USA</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
+		<div class="row">
+			<c:forEach var="u" items="${allCategories}">
+				<div class="col-sm-3">
+					<div class="card m-3">
+						<img src="${u.category_image}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title card-header rounded">
+								<c:out value="${u.name}"></c:out>
+							</h5>
+							<p class="card-text card-body">Exclusive courses in this
+								category</p>
+							<p class="card-text">
+								<small class="text-muted">Cybage e-learning</small>
+							</p>
+							<a class="btn btn-outline-dark btn-lg"
+								href="<%=request.getContextPath()%>/AppController/login"
+								role="button">Explore more</a>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="card m-3">
-				<img src="<%=request.getContextPath()%>/images/motivation.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Category 3</h5>
-					<p class="card-text">Description on category 3</p>
-					<p class="card-text">
-						<small class="text-muted">GTU, India</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
-				</div>
-			</div>
+
+			</c:forEach>
 		</div>
-
-		<div class="card-group">
-			<div class="card m-3">
-				<img src="<%=request.getContextPath()%>/images/motivation.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Category 4</h5>
-					<p class="card-text">Description on category 4</p>
-					<p class="card-text">
-						<small class="text-muted">Oxford University, UK</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
-				</div>
-			</div>
-			<div class="card m-3">
-				<img src="<%=request.getContextPath()%>/images/motivation.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Category 5</h5>
-					<p class="card-text">Description on category 5</p>
-					<p class="card-text">
-						<small class="text-muted">California University, USA</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
-				</div>
-			</div>
-			<div class="card m-3">
-				<img src="<%=request.getContextPath()%>/images/motivation.jpg"
-					class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Category 6</h5>
-					<p class="card-text">Description on category 6</p>
-					<p class="card-text">
-						<small class="text-muted">GTU, India</small>
-					</p>
-					<a class="btn btn-outline-dark btn-lg"
-						href="<%=request.getContextPath()%>/AppController/login"
-						role="button">Explore more</a>
-				</div>
-			</div>
-		</div>
-
-	</div>
-	<figure class="text-center mt-5">
-		<blockquote class="blockquote">
-			<p>Our approach is a matter of a choice. Our motive, however, is
-				a matter of our character.</p>
-		</blockquote>
-		<figcaption class="blockquote-footer">
-			<cite title="Source Title">Arun Nathani</cite>, Cybage
-		</figcaption>
-	</figure>
+		<figure class="text-center mt-5">
+			<blockquote class="blockquote">
+				<p>Our approach is a matter of a choice. Our motive, however, is
+					a matter of our character.</p>
+			</blockquote>
+			<figcaption class="blockquote-footer">
+				<cite title="Source Title">Arun Nathani</cite>, Cybage
+			</figcaption>
+		</figure>
 </section>
 <%@include file="footer.jsp"%>
 
